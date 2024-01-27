@@ -48,10 +48,10 @@ python cli.py init
 
 ### Commit Changes
 
-Commit your changes with a descriptive message:
+Commit your changes with a descriptive message. Optionally, specify files to stage and commit:
 
 ```bash
-python cli.py commit -m "Your commit message here"
+python cli.py commit -m "Your commit message here" -f file1.txt file2.txt
 ```
 
 ### Pull Updates
@@ -70,14 +70,7 @@ Push your local changes to the remote repository:
 python cli.py push
 ```
 
-## Troubleshooting
-
-If you encounter any issues or have questions, please check our [troubleshooting guide](TROUBLESHOOTING.md).
 
 ## Contributing
 
 If you'd like to contribute to the development of this tool, please follow our [contribution guidelines](CONTRIBUTING.md).
-
-```
-
-Feel free to make any additional modifications based on your preferences or project-specific details. If you have specific elements you'd like to include or customize, just let me know!
