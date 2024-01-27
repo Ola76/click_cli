@@ -1,3 +1,4 @@
+import os
 import click
 import subprocess
 
@@ -8,6 +9,11 @@ def git_commit(message, file):
     """A script to commit changes using Git."""
     
     try:
+        # Check if the current directory is a Git repository
+        if not os.path.exists('.git'):
+            click.echo('This directory is not a Git repository. Initialize Git manually.')
+            return
+
         if file:
             subprocess.run(['git', 'add'] + list(file), check=True)
         else:
