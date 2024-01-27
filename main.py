@@ -26,12 +26,17 @@ def git_commit(message, file):
             click.echo('Changes committed successfully!')
         else:
             click.echo('No changes to commit.')
+
+        # Push changes to the remote repository
+        subprocess.run(['git', 'push'], check=True)
+        click.echo('Changes pushed successfully!')
+
     except subprocess.CalledProcessError as e:
         click.echo(f'Error: {e}')
-        click.echo('Failed to commit changes.')
+        click.echo('Failed to commit and push changes.')
 
 if __name__ == '__main__':
     git_commit()
 
 
-# python git_commit_script.py --message "Initial commit" --file file1.txt file2.txt
+# python main.py --message "Initial commit" --file main.py requirements.txt
