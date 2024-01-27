@@ -1,4 +1,4 @@
-```markdown
+
 # Click CLI Automation Tool
 
 A command-line interface (CLI) automation tool built using Click to streamline common Git operations. This tool simplifies tasks such as initializing a Git repository, committing changes, pulling updates, and pushing changes to a remote repository.
