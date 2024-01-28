@@ -156,6 +156,7 @@ def git_commit():
 if __name__ == '__main__':
     initialize_or_clone_repository()
     git_ignore_management()
+    branch_management()
     git_commit()
     sys.stdout.close()
     sys.stderr.close()
