@@ -22,6 +22,7 @@ This Python script automates the process of committing changes using Git. It uti
    Follow the prompts to enter the commit message, select files, and confirm the push to the remote repository.
 
 ## Features
+- .gitignore management (add, delete, view).
 - Branch management (create, switch, current).
 - Commit changes with a custom commit message.
 - Select specific files to commit or commit all changes.
