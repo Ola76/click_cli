@@ -1,76 +1,42 @@
-# Git Click CLI Automation Tool
+# Git Commit Script with GitPython
 
-A command-line interface (CLI) automation tool built using Click to simplify common Git operations. This tool allows for effortless Git repository initialization, committing changes, pulling updates, and pushing changes to a remote repository.
-
-## Features
-
-- **Git Initialization:** Easily initialize a new Git repository.
-- **Commit Changes:** Streamline the process of committing changes with a clear command.
-- **Pull Updates:** Effortlessly pull the latest changes from the remote repository.
-- **Push Changes:** Seamlessly push your local changes to the remote repository.
+This Python script automates the process of committing changes using Git. It utilizes the GitPython library to interact with Git repositories. The script prompts the user for a commit message, allows the selection of files to commit, and optionally pushes the changes to the remote repository.
 
 ## Prerequisites
 
-Before using this tool, ensure that you have the following installed on your machine:
-
-- [Python](https://www.python.org/downloads/) (>=3.6)
-- [Git](https://git-scm.com/downloads/)
-
-## Installation
-
-1. **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/Ola76/click_cli.git
-    ```
-
-2. **Navigate to the project directory:**
-
-    ```bash
-    cd click_cli
-    ```
-
-3. **Install the required dependencies:**
-
-    ```bash
-    pip install -r requirements.txt
-    ```
+- Python installed on your machine
+- GitPython library installed (`pip install gitpython`)
 
 ## Usage
 
-### Git Initialization
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/yourusername/your-repo.git
+   cd your-repo
+   ```
 
-Initialize a new Git repository in the current directory:
+2. **Run the Script:**
+   ```bash
+   python git_commit_script.py
+   ```
+   Follow the prompts to enter the commit message, select files, and confirm the push to the remote repository.
 
-```bash
-python cli.py init
-```
+## Features
 
-### Commit Changes
+- Commit changes with a custom commit message.
+- Select specific files to commit or commit all changes.
+- Optional push to the remote repository after committing.
 
-Commit your changes with a descriptive message. Optionally, specify files to stage and commit:
+## Troubleshooting
 
-```bash
-python cli.py commit -m "Your commit message here" -f file1.txt file2.txt
-```
-
-### Pull Updates
-
-Pull the latest changes from the remote repository:
-
-```bash
-python cli.py pull
-```
-
-### Push Changes
-
-Push your local changes to the remote repository:
-
-```bash
-python cli.py push
-```
-
+- If you encounter any issues, make sure you have GitPython installed (`pip install gitpython`).
+- Check if your current directory is a valid Git repository.
 
 ## Contributing
 
-If you'd like to contribute to the development of this tool, please follow our [contribution guidelines](CONTRIBUTING.md).
+Contributions are welcome! Please fork the repository and submit a pull request with your improvements.
+
+
+## Acknowledgments
+
+- Thank you to the GitPython developers for providing a Pythonic interface to Git.
