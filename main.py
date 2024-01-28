@@ -1,4 +1,5 @@
 import git
+import sys
 
 def git_commit():
     try:
@@ -36,3 +37,5 @@ def git_commit():
 
 if __name__ == '__main__':
     git_commit()
+    sys.stdout.close()
+    sys.stderr.close()
