@@ -1,5 +1,31 @@
+import os
 import git
 import sys
+
+def initialize_or_clone_repository():
+    try:
+        if not os.path.exists('.git'):
+            init_or_clone = input('No Git repository found. Do you want to initialize a new repository (I) or clone an existing one (C)? ').lower()
+            
+            if init_or_clone == 'i':
+                repo_url = input('Enter the Git repository URL (or leave blank to initialize locally): ')
+                if repo_url:
+                    git.Repo.clone_from(repo_url, '.')
+                    print(f'Repository cloned from {repo_url}.')
+                else:
+                    git.Repo.init('.')
+                    print('Initialized a new Git repository locally.')
+            elif init_or_clone == 'c':
+                repo_url = input('Enter the Git repository URL to clone: ')
+                git.Repo.clone_from(repo_url, '.')
+                print(f'Repository cloned from {repo_url}.')
+            else:
+                print('Invalid choice. Exiting.')
+                sys.exit(1)
+                
+    except git.exc.GitCommandError as e:
+        print(f'Error: {e}')
+        print('Failed to initialize or clone the repository.')
 
 def git_commit():
     try:
@@ -33,9 +59,14 @@ def git_commit():
             print('No changes to commit.')
 
     except git.exc.InvalidGitRepositoryError:
-        print('This directory is not a Git repository. Initialize Git manually.')
+        print('This directory is not a Git repository. Exiting.')
+        sys.exit(1)
+    except git.exc.GitCommandError as e:
+        print(f'Error: {e}')
+        print('Failed to perform Git operations.')
 
 if __name__ == '__main__':
+    initialize_or_clone_repository()
     git_commit()
     sys.stdout.close()
     sys.stderr.close()
