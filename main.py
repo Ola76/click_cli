@@ -1,6 +1,6 @@
-import os
 import git
 import sys
+import os
 
 def initialize_or_clone_repository():
     try:
@@ -26,6 +26,44 @@ def initialize_or_clone_repository():
     except git.exc.GitCommandError as e:
         print(f'Error: {e}')
         print('Failed to initialize or clone the repository.')
+
+def branch_management():
+    try:
+        repo = git.Repo('.')
+        branches = [branch.name for branch in repo.branches]
+
+        print('Available branches:')
+        for branch in branches:
+            print(f' - {branch}')
+
+        branch_choice = input('Do you want to create a new branch (N), switch to an existing branch (S), or continue with the current branch (C)? ').lower()
+
+        if branch_choice == 'n':
+            new_branch_name = input('Enter the name for the new branch: ')
+            default_branch = input('Use the default branch as the starting point? (y/n): ').lower()
+            
+            if default_branch == 'y':
+                repo.git.checkout('master')  # Change 'master' to your default branch name
+                repo.git.branch(new_branch_name)
+                repo.git.checkout(new_branch_name)
+            else:
+                base_branch = input('Enter the name of the branch to base the new branch on: ')
+                repo.git.checkout(base_branch)
+                repo.git.branch(new_branch_name)
+                repo.git.checkout(new_branch_name)
+
+            print(f'New branch "{new_branch_name}" created and checked out.')
+        elif branch_choice == 's':
+            switch_branch = input('Enter the name of the branch to switch to: ')
+            repo.git.checkout(switch_branch)
+            print(f'Switched to branch "{switch_branch}".')
+        elif branch_choice != 'c':
+            print('Invalid choice. Exiting.')
+            sys.exit(1)
+
+    except git.exc.GitCommandError as e:
+        print(f'Error: {e}')
+        print('Failed to perform Git operations during branch management.')
 
 def git_commit():
     try:
@@ -63,10 +101,11 @@ def git_commit():
         sys.exit(1)
     except git.exc.GitCommandError as e:
         print(f'Error: {e}')
-        print('Failed to perform Git operations.')
+        print('Failed to perform Git operations during commit.')
 
 if __name__ == '__main__':
     initialize_or_clone_repository()
+    branch_management()
     git_commit()
     sys.stdout.close()
     sys.stderr.close()
