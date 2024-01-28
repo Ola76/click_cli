@@ -27,6 +27,56 @@ def initialize_or_clone_repository():
         print(f'Error: {e}')
         print('Failed to initialize or clone the repository.')
 
+def git_ignore_management():
+    try:
+        repo = git.Repo('.')
+        
+        # Check if .gitignore file exists
+        gitignore_path = os.path.join(repo.working_tree_dir, '.gitignore')
+        
+        if not os.path.exists(gitignore_path):
+            create_gitignore = input('No .gitignore file found. Do you want to create one? (y/n): ').lower()
+            
+            if create_gitignore == 'y':
+                with open(gitignore_path, 'w') as gitignore_file:
+                    gitignore_file.write("# Example .gitignore file\n")
+                print('.gitignore file created.')
+            else:
+                print('Continuing without creating .gitignore.')
+
+        # Provide options for Git Ignore Management
+        print('Options for Git Ignore Management:')
+        print('1. Add entries to .gitignore')
+        print('2. Remove entries from .gitignore')
+        print('3. List entries in .gitignore')
+        gitignore_choice = input('Choose an option (1/2/3): ')
+
+        if gitignore_choice == '1':
+            entries_to_add = input('Enter entries to add to .gitignore (separate multiple entries with spaces): ')
+            with open(gitignore_path, 'a') as gitignore_file:
+                gitignore_file.write(entries_to_add + '\n')
+            print('Entries added to .gitignore.')
+        elif gitignore_choice == '2':
+            entries_to_remove = input('Enter entries to remove from .gitignore (separate multiple entries with spaces): ')
+            with open(gitignore_path, 'r') as gitignore_file:
+                lines = gitignore_file.readlines()
+            with open(gitignore_path, 'w') as gitignore_file:
+                for line in lines:
+                    if line.strip() not in entries_to_remove.split():
+                        gitignore_file.write(line)
+            print('Entries removed from .gitignore.')
+        elif gitignore_choice == '3':
+            with open(gitignore_path, 'r') as gitignore_file:
+                print('.gitignore entries:')
+                print(gitignore_file.read())
+        else:
+            print('Invalid choice. Exiting.')
+            sys.exit(1)
+
+    except git.exc.GitCommandError as e:
+        print(f'Error: {e}')
+        print('Failed to perform Git operations during .gitignore management.')
+
 def branch_management():
     try:
         repo = git.Repo('.')
@@ -105,7 +155,7 @@ def git_commit():
 
 if __name__ == '__main__':
     initialize_or_clone_repository()
-    branch_management()
+    git_ignore_management()
     git_commit()
     sys.stdout.close()
     sys.stderr.close()
