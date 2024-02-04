@@ -17,7 +17,7 @@ This Python script automates the process of committing changes using Git. It uti
 
 2. **Run the Script:**
    ```bash
-   python git_commit_script.py
+   python main.py
    ```
    Follow the prompts to enter the commit message, select files, and confirm the push to the remote repository.
 
